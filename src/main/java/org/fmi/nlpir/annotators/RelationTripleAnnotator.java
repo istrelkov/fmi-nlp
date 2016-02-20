@@ -18,9 +18,11 @@ public class RelationTripleAnnotator extends AbstractAnotator {
 			Collection<RelationTriple> triples = sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class);
 			// Print the triples
 			for (RelationTriple triple : triples) {
-				builder.append(triple.confidence + " | " + triple.subjectLemmaGloss() + " | "
-						+ triple.relationLemmaGloss() + " | " + triple.objectLemmaGloss());
-				builder.append('\n');
+				if (!triple.subjectHead().ner().equalsIgnoreCase("o")) {
+					builder.append(triple.confidence + " | " + triple.subjectLemmaGloss() + " | "
+							+ triple.relationLemmaGloss() + " | " + triple.objectLemmaGloss());
+					builder.append('\n');
+				}
 			}
 		}
 		return builder.toString();

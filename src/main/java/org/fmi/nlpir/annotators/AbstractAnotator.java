@@ -30,11 +30,14 @@ public abstract class AbstractAnotator {
 	public Properties getProperties() {
 		return props;
 	}
-
-	public Annotation annotate(File f) {
-		Annotation annotation = new Annotation(IOUtils.stringFromFile(f.getAbsolutePath()));
+	
+	public Annotation annotate(String string) {
+		Annotation annotation = new Annotation(string);
 		pipeline.annotate(annotation);
 		return annotation;
+	}
+	public Annotation annotate(File f) {
+		return annotate(IOUtils.stringFromFile(f.getAbsolutePath()));
 	}
 	
 	public abstract String getAnnotated(Annotation annotation);
